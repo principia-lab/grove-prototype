@@ -2,25 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Grove Prototype — AI + Materials Discovery</title>
+  <title>Grove Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 20px; }
-    h1 { color: #2a6; }
-    img { border: 1px solid #ccc; padding: 5px; border-radius: 8px; }
-    a { color: #06c; }
+    body { font-family: 'Inter', sans-serif; background: #fff; color: #000; max-width: 750px; margin: auto; line-height: 1.6; padding: 2rem; }
+    h2,h3{ color: #7085FF; }
+    .module { margin-bottom: 3rem; }
+    #insight-feed li { margin-bottom: 0.5rem; }
+    .tradeoff-bar { height: 20px; margin: 5px 0; background: #39FF14; transition: width 0.5s; }
+    textarea { width: 100%; margin-top: 0.5rem; }
   </style>
 </head>
 <body>
-  <h1>🌱 Grove Prototype</h1>
-  <p>This prototype explores <strong>AI-augmented scientific discovery</strong> in energy materials.</p>
 
-  <h2>Lab Note</h2>
-  <p><a href="labnote.md">Read the lab note</a></p>
+  <!-- Landing / Grove Now -->
+  <section class="module" id="landing">
+    <h2>Welcome to Grove Prototype</h2>
+    <p>Accelerating AI-assisted scientific discovery for new energy materials.</p>
+    <div id="grove-now">
+      <h3>Grove Now</h3>
+      <p>Prototyping GPT-guided material discovery: AI surfaces high-signal candidates for energy systems.</p>
+    </div>
+  </section>
 
-  <h2>Dataset</h2>
-  <p><a href="grove_materials_dataset.csv">Download CSV</a></p>
+  <!-- Interactive Chart -->
+  <section class="module" id="dashboard">
+    <h3>Interactive Cluster Chart</h3>
+    <div id="clusters-chart"></div>
+  </section>
 
-  <h2>Top 10 Candidate Materials</h2>
-  <img src="top10_ai_success_probabilities.png" alt="Top 10 AI-ranked materials" width="600">
+  <!-- Reflection Loop -->
+  <section class="module" id="reflection">
+    <h3>Reflection Loop</h3>
+    <div id="cluster-reflections"></div>
+  </section>
+
+  <!-- AI-Assisted Experiment Suggestions -->
+  <section class="module" id="experiments">
+    <h3>AI-Assisted Experiment Suggestions</h3>
+    <div id="experiment-suggestions"></div>
+  </section>
+
+  <!-- Tradeoff Visualizer -->
+  <section class="module" id="tradeoffs">
+    <h3>Tradeoff Visualizer</h3>
+    <div id="tradeoff-container"></div>
+  </section>
+
+  <!-- Literature Triangulation -->
+  <section class="module" id="literature">
+    <h3>Literature Triangulation</h3>
+    <div id="literature-links"></div>
+  </section>
+
+  <!-- Insight Feed -->
+  <section class="module" id="insights">
+    <h3>Insight Feed</h3>
+    <ul id="feed-items"></ul>
+  </section>
+
+  <!-- Grove Explorer (Public View Preview) -->
+  <section class="module" id="explorer">
+    <h3>Grove Explorer Preview</h3>
+    <div id="explorer-clusters"></div>
+    <div id="explorer-tradeoffs"></div>
+    <div id="explorer-literature"></div>
+    <div id="explorer-suggestions"></div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.2/dist/socket.io.min.js"></script>
+  <script src="assets/js/grove-prototype.js"></script>
+  <script>
+    async function initGrovePrototype() {
+      // Placeholder cluster data
+      const clusters = [
+        {clusterLabel: 'Material A', summary: 'Conductive polymer', tradeoffs: {cost:0.5, stability:0.8}, suggestions:[{title:'Test doping', priority:'High'}], literature:[{title:'Polymer Study', link:'#'}], reflection:'Need better conductivity', status:'important'}],
+        {clusterLabel: 'Material B', summary: 'Superconductor', tradeoffs: {cost:0.8, stability:0.9}, suggestions:[{title:'Low-temp test', priority:'Medium'}], literature:[{title:'Superconductor Paper', link:'#'}], reflection:'Explore alloying', status:''}]
+      ];
+
+      // Render all modules
+      renderLensViewAnimated(clusters, "score");
+      renderClusterTradeoffs(clusters);
+      renderClusterLiterature(clusters);
+      renderReflectionLoop(clusters);
+      renderExperimentSuggestions(clusters);
+      renderGroveExplorer(clusters);
+      updateInsightFeedWithSignals(clusters);
+    }
+
+    window.onload = initGrovePrototype;
+  </script>
+
 </body>
 </html>
